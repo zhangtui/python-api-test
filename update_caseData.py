@@ -21,5 +21,5 @@ if __name__=='__main__':
     me = MyExcel(filePath)
     caseDatas = me.get_all_testDatas()
     UpdateDatas().updateDates(caseDatas,1)
-    print(eval(caseDatas[1]["expected_data"]))
-    print(type(eval(caseDatas[1]["expected_data"])))
+    print(caseDatas[2]["expected_data"])
+    print(type(caseDatas[2]["expected_data"]))
