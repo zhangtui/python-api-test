@@ -63,33 +63,33 @@ class SignatureGenerator:
 if __name__ == '__main__':
     import time
     import requests
-    url_resource_part = 'vehicle-alarm/internal/electricHistory/getElectricHistories'
     secret_key = '94a7cbbf8511a288d22d4cf8705d61d0'
     signt = int(time.time()*1000)
-    url = "http://jmcuat.jmc.com.cn/"
-    # params_map = {
-    #     'vin': 'JMCGONGPEN330PHEV',
-    #     'startTime': '2018-08-20',
-    #     'endTime': '2018-08-21',
-    #     'pageIndex': '1',
-    #     'pageSize': '20',
-    #     'signt':'1534840780000',
-    #     #'token': 'vc-server-admin---amZYRk9JODdUWjBwNVlCWHFkdVJkWi91NTJLNk1tY05RWTkrQzZMelMrQThZQWZRNFBHMjdTL2tOY3lDMmJqVlpBbkkzWXpOdUxTRwpXeGZIeUlIdGlRPT0-___1521077726387___2___2___bHs0NMLA4yA60TE3___2',
-    #     'appkey': '5732477868'
-    # }
+    # url = "https://jmhuat.landwind.com/"
+    url = "https://jmhext.landwind.com/"
+    # url_resource_part = 'update-center/checkVersion'
+    # url_resource_part = 'vehicle-customer/auth/checkAvn'
+    url_resource_part = 'update-center/reportUpdateResult'
+    # 服务站同步接口
+    url_resource_part = 'tdata-sync/internal/syncDealer/importServiceStationInfo'
     params_map = {
-        "appkey":"5732477868",
-        'signt':str(signt)
+        "appkey": "5732477868",
+        'signt': str(signt)
     }
-    json = {
-        "vins":"JMCGONGPEN330PHEV"
-    }
+    json =[
+        {"serviceName": "威信县利达汽修厂", "province": "云南省", "city": "昭通市", "servicePhone": "13887084598",
+         "hotLine": "13887097133", "county": "威信县", "longitude": "80", "latitude": "80", "serviceCode": "23242091_01",
+         "address": "云南省昭通市威信县扎西镇石龙村黄粉厂旁", "stationStatus": "ALREADY_OPENED", "createdTime": int(time.time() * 1000),
+         "status": "1"}
+    ]
     sign = SignatureGenerator.generate(url_resource_part, params_map)
-    print(sign)
     params_map.update(sign=sign)
+    print(params_map)
     headers = {
-        "ContentType":"application/x-www-form-urlencoded"
+        "ContentType":"application/json",
+        # "accept-encoding:":"gzip",
+        # "user-agent":"okhttp/3.2.0"
     }
-    result = requests.post(url=url+url_resource_part,params=params_map,data=json)
-    print(result.url)
-    print(result.text)
+    # result = requests.post(url=url+url_resource_part,params=params_map,json=json)
+    # print(result.url)
+    # print(result.text)
