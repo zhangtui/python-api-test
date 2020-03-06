@@ -21,5 +21,6 @@ if __name__=='__main__':
     me = MyExcel(filePath)
     caseDatas = me.get_all_testDatas()
     UpdateDatas().updateDates(caseDatas,1)
+    print(caseDatas[2]["url"])
     print(caseDatas[2]["expected_data"])
     print(type(caseDatas[2]["expected_data"]))
